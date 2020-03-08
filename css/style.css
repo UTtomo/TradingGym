@@ -1,10 +1,12 @@
 body {
     font: 10px sans-serif;
+    color: #aaa;
     background-color: #333333;
 }
 
 text {
     fill: #aaa;
+    color: #aaa;
 }
 path.candle.body {
     stroke-width: 0;
@@ -55,11 +57,6 @@ path.volume {
     stroke: #ff7f0e;
 }
 
-button {
-    position: absolute;
-    right: 110px;
-    top: 25px;
-}
 
 path.macd {
     stroke: #0000AA;
@@ -181,4 +178,19 @@ path.middle, path.zero {
 
 .tradearrow path.highlight.sell {
     stroke: #9900FF;
+}
+
+/* ------------------------------------------------------------ */
+
+.btn-outline-buy{
+    background-color: rgba(255, 0, 0, 0.418);
+    padding: 5px 30px 5px 30px;
+}
+.btn-outline-sell{
+    background-color: rgba(17, 13, 240, 0.418);
+    padding: 5px 30px 5px 30px;
+}
+.range-field{
+    width: 150px;
+    color: #0000FF;
 }

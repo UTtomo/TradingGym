@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>
 <script src="http://d3js.org/d3.v4.min.js"></script>
 <script src="http://techanjs.org/techan.min.js"></script>
-<head>Trading Gym</head>
+<h>Trading Gym</head>
 <a href= "chart/USDJPY/chart.html">USDJPY</a>
 <a href= "chart/EURJPY/chart.html">EURUSD</a>
 <script>
 
+// definition of function and variable
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -87,6 +90,8 @@
 
     var defs = svg.append("defs");
 
+    
+// cursor information
     defs.append("clipPath")
             .attr("id", "ohlcClip")
         .append("rect")
@@ -95,21 +100,23 @@
             .attr("width", width)
             .attr("height", height);
 
+// y axis
     svg = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+//the whole chart
     var ohlcSelection = svg.append("g")
             .attr("class", "ohlc")
             .attr("transform", "translate(0,0)");
-
+// volume
     ohlcSelection.append("g")
             .attr("class", "volume")
             .attr("clip-path", "url(#ohlcClip)");
-
+// candlestick
     ohlcSelection.append("g")
             .attr("class", "candlestick")
             .attr("clip-path", "url(#ohlcClip)");
-
+// moving
     ohlcSelection.append("g")
             .attr("class", "indicator sma ma-0")
             .attr("clip-path", "url(#ohlcClip)");
@@ -149,6 +156,7 @@
         var accessor = ohlc.accessor();
 
         feed = csv.map(function(d) {
+       
             return {
                 date: parseDate(d.Date),
                 open: +d.Open,
@@ -161,6 +169,8 @@
 
         // Start off an initial set of data
         redraw(feed.slice(0, 163));
+        
+        
     });
 
     function redraw(data) {
@@ -194,10 +204,20 @@
         // Set next timer expiry
         setTimeout(function() {
             var newData;
+            var Data;
+            var price = document.getElementById('price');
+
 
             if(data.length < feed.length) {
                 // Simulate a daily feed
                 newData = feed.slice(0, data.length+1);
+                Data = newData[newData.length - 1];
+  
+                console.log(Data.close);
+                price.innerHTML = Data.close;
+              
+          
+                
             }
             else {
                 // Simulate intra day updates when no feed is left
@@ -219,4 +239,16 @@
     }
 
 </script>
+<h2>現在の価格</h2>
+<div id ="price">__.___</div>
+<div>
+<p>エントリー</p>
+
+<form class="range-field my-4 w-25 input-range">
+<input type="range" min="0" max="100" />
+</form>
+<button type="button" class="btn btn-outline-buy"onclick="history.back()">Buy</button>
+<button type="button" class="btn btn-outline-sell"onclick="history.back()">Sell</button>
+</div>
+
 </body>
