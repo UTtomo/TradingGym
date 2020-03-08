@@ -21,9 +21,7 @@
         stroke: #000000;
     }
 
-    path.candle.body {
-        stroke-width: 0;
-    }
+
 
     path.candle.up {
         fill: #00AA00;
