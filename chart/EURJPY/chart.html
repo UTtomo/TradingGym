@@ -3,14 +3,22 @@
 <head>
         
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
+
+
 <body>
 <script src="http://d3js.org/d3.v4.min.js"></script>
 <script src="http://techanjs.org/techan.min.js"></script>
+
 <h>Trading Gym</head>
 <a href= "chart/USDJPY/chart.html">USDJPY</a>
 <a href= "chart/EURJPY/chart.html">EURUSD</a>
+
+<div class="row">
+        <div class="col-sm-8">
 <script>
 
 // definition of function and variable
@@ -205,17 +213,26 @@
         setTimeout(function() {
             var newData;
             var Data;
+            var spread = 0.8;
             var price = document.getElementById('price');
-
+            var priceNumber;
+            
+            var priceBuy = document.getElementById('price-buy');
+            var priceSell = document.getElementById('price-sell');
+         
 
             if(data.length < feed.length) {
                 // Simulate a daily feed
                 newData = feed.slice(0, data.length+1);
                 Data = newData[newData.length - 1];
   
-                console.log(Data.close);
+                
                 price.innerHTML = Data.close;
-              
+                priceNumber = parseFloat(Data.close);
+                console.log(priceNumber);
+                priceBuy.innerHTML = priceNumber;
+                priceSell.innerHTML =priceNumber;
+                
           
                 
             }
@@ -238,17 +255,26 @@
         );
     }
 
-</script>
+</script></div>
+<div class="col-sm-4">
 <h2>現在の価格</h2>
-<div id ="price">__.___</div>
+<p id ="price">__.___</p>
+<p class = "title">現在の価格</p>
+<div class = "row-box">
+<p id = "price-buy" class="price-buy item">00.000</p>
+<p id = "price-sell" class="price-sell item">00.000</p>
+</div>
 <div>
-<p>エントリー</p>
+<p class="title">送り速度の調整</p>
 
 <form class="range-field my-4 w-25 input-range">
 <input type="range" min="0" max="100" />
 </form>
+<p class="title">送り速度の調整</p>
 <button type="button" class="btn btn-outline-buy"onclick="history.back()">Buy</button>
 <button type="button" class="btn btn-outline-sell"onclick="history.back()">Sell</button>
+</div>
+</div>
 </div>
 
 </body>

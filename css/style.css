@@ -181,15 +181,36 @@ path.middle, path.zero {
 }
 
 /* ------------------------------------------------------------ */
+.title{
+    margin-top: 5px;;
+}
+.price-buy{
+    font-size: 20px;
+    color: red;
+}
+.price-sell{
+    font-size: 20px;
+    color: skyblue;
+}
 
 .btn-outline-buy{
     background-color: rgba(255, 0, 0, 0.418);
     padding: 5px 30px 5px 30px;
+
 }
 .btn-outline-sell{
     background-color: rgba(17, 13, 240, 0.418);
     padding: 5px 30px 5px 30px;
+   
 }
+.row-box{
+    display: flex;
+    text-align: center;
+}
+.item{
+    margin: 0 5px 0 5px;
+}
+
 .range-field{
     width: 150px;
     color: #0000FF;
