@@ -196,9 +196,7 @@ html{
 }
 
 /* ----- front page ------------------------------------------------------- */
-.title{
-    margin-top: 5px;;
-}
+
 
 .bottom-fix{
 position:fixed;
@@ -217,8 +215,27 @@ color: #a1a1a1;
 text-decoration: none;
 }
 
+/* ---------sidebar-------------------------------------------- */
 
+.side-bar{
+    color:#fff;
+    text-align: center;
+}
+
+.side-bar img{
+    margin-top: 30px;
+}
+.side-bar p{
+    margin-bottom: 100px;
+}
 /* --------order page----------------------------------------------------------------- */
+.order-box{
+    
+}
+.input-group, .form-control{
+    width: 100px;
+}
+
 .price-buy{
     font-size: 20px;
     color: red;
@@ -238,6 +255,13 @@ text-decoration: none;
     padding: 5px 30px 5px 30px;
    
 }
+.btn-outline-stop{
+    background-color: rgba(221, 221, 221, 0.418);
+    padding: 5px 60px 5px 60px;
+    margin-top: 3px;
+   
+}
+
 .row-box{
     display: flex;
     text-align: center;
@@ -249,4 +273,19 @@ text-decoration: none;
 .range-field{
     width: 150px;
     color: #0000FF;
+}
+.form-control{
+    font-size: 10px;
+}
+
+/* -----------------chart page------------------------------------- */
+.left-fix{
+
+    position:fixed;
+    left:50px;
+    top:50px;
+    color: #DDDDDD;
+    padding: 15px;
+    border-radius: 15px;
+
 }
