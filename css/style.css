@@ -279,13 +279,16 @@ text-decoration: none;
 }
 
 /* -----------------chart page------------------------------------- */
-.left-fix{
+.right-fix{
 
     position:fixed;
-    left:50px;
+    right:50px;
     top:50px;
     color: #DDDDDD;
     padding: 15px;
     border-radius: 15px;
 
+}
+.flexBox{
+    display: flex;
 }

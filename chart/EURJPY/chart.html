@@ -14,20 +14,12 @@
 <script src="http://techanjs.org/techan.min.js"></script>
 <script src="https://riversun.github.io/jsframe/jsframe.js"></script>
 
-
-<h>Trading Gym</head>
-<a href= "#">USDJPY</a>
-<a id="bt"href=""> EURUSD</a>
-
-
+<div class="container">
      
 <script>
 
-
-
-
-
 // definition of function and variable
+function chart(name, symbol, fullWidth, fullHeight) {
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -257,8 +249,19 @@
                 timeAnnotation.format()(coords.x) + ", " + ohlcAnnotation.format()(coords.y)
         );
     }
+}
+
+chart("Facebook, Inc.", "FB", 300, 200);
+chart("Facebook, Inc.", "FB", 300, 200);
+chart("Facebook, Inc.", "FB", 300, 200);
+
+
+$('svg').wrapAll('<div class = "flexBox">');
+
+// jqueryで親要素を指定し、flexbox、collapseの実装
 
 </script>
+</div>
 <div class = "order-box left-fix">
 
         <p class = "title">現在の価格</p>
