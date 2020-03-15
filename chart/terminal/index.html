@@ -21,6 +21,12 @@
     
 <script>
 
+query = location.search;
+var value = query.split('=');
+ 
+console.log(decodeURIComponent(value[1]));
+
+
 // definition of function and variable
 function chart(name, symbol, fullWidth, fullHeight) {
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -254,6 +260,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
         );
     }
 }
+
 
 chart("Facebook, Inc.", "FB", 300, 200);
 chart("Google, Inc.", "GOOG", 300, 200);
