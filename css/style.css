@@ -353,3 +353,13 @@ text-decoration: none;
 .flexBox{
     display: flex;
 }
+
+
+
+/* -------------------------------chart window-------------------------------------------- */
+svg{
+    background: #FFF;
+    border: solid 3px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    padding-top: 15px;
+}

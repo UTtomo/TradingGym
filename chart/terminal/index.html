@@ -23,8 +23,12 @@
 
 query = location.search;
 var value = query.split('=');
- 
-console.log(decodeURIComponent(value[1]));
+var result = value[1].split('%2C') ;
+
+console.log( result );
+
+
+
 
 
 // definition of function and variable
