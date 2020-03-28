@@ -352,12 +352,13 @@ text-decoration: none;
 }
 .flexBox{
     display: flex;
+    flex-wrap: wrap;
 }
 
 
 
 /* -------------------------------chart window-------------------------------------------- */
-svg{
+.chart-box{
     background: #FFF;
     border: solid 3px #6091d3;/*線*/
     border-radius: 10px;/*角の丸み*/
