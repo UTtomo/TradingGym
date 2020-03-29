@@ -22,13 +22,22 @@
     
 <script>
 
+query = location.search;
+var value = query.split('=');
+var result = value[1].split('%2C') ;
 
- 
-chart("Facebook, Inc.", "FB");
+console.log( result );
+console.log( result[0] );
+
+var length = Object.keys(result).length;
+for (var i=0; i <= length-1; i++){
+    chart(" ",result[i]);
+    $(result[i]).wrap('<div onclick = MouseClick() >');
+}
+
+chart("Facebook, Inc.", "FB2");
 chart("Google, Inc.", "GOOG");
 chart("Apple, Inc.", "AAPL");
-chart("Facebook, Inc.", "FB");
-
 
 $('svg').wrapAll('<div class = "col-sm-10 flexBox">');
 $('svg').wrap('<div class = "chart-box" onclick = MouseClick() >');
@@ -38,6 +47,9 @@ function MouseClick(){
     alert('Click');
     $(".chart-box").css("borderColor", "#f00");
 }
+
+
+
 </script>
 </div>
     
