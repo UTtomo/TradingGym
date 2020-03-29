@@ -1,9 +1,4 @@
 
-query = location.search;
-var value = query.split('=');
-var result = value[1].split('%2C') ;
-
-console.log( result );
 
 
 var display= [
@@ -265,8 +260,3 @@ function MouseClick(){
     alert('Click');
     $(".chart-box").css("borderColor", "#f00");
 }
-
- 
-
-
-// jqueryで親要素を指定し、flexbox、collapseの実装
