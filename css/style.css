@@ -359,8 +359,5 @@ text-decoration: none;
 
 /* -------------------------------chart window-------------------------------------------- */
 .chart-box{
-    background: #FFF;
-    border: solid 3px #6091d3;/*線*/
-    border-radius: 10px;/*角の丸み*/
-    padding-top: 15px;
+    background: #222;
 }

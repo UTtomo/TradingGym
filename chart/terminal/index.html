@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <head>
         
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/style.css">
@@ -12,6 +12,7 @@
 <body>
 <script src="http://d3js.org/d3.v4.min.js"></script>
 <script src="http://techanjs.org/techan.min.js"></script>
+<script src="https://riversun.github.io/jsframe/jsframe.js"></script>
 <script src="index.js"></script>
 
 <h>Trading Gym</head>
@@ -22,31 +23,83 @@
     
 <script>
 
+
+
+
 query = location.search;
 var value = query.split('=');
 var result = value[1].split('%2C') ;
 
-console.log( result );
-console.log( result[0] );
+// console.log( result );
+// console.log( result[0] );
+
+const jsFrame = new JSFrame();
 
 var length = Object.keys(result).length;
+
+$('svg').wrapAll('<div class = "col-sm-10 flexBox">');
+$('svg').wrap('<div class = "chart-box">');
+
+// ３つjsframeでウィンドウを出し、その中にそれぞれのグラフを入れたいんだけど、なぜかうまくいっていない。
+
 for (var i=0; i <= length-1; i++){
-    chart(" ",result[i]);
-    $(result[i]).wrap('<div onclick = MouseClick() >');
+    // chart("Facebook, Inc.", "FB");
+
+    var frame ={};
+     
+    frame[i] = jsFrame.create({
+    title: result[i],
+    left: 20+50*i, top: 20+50*i, width: window.innerWidth/2 , height: window.innerHeight/2,
+    movable: true,//マウスで移動可能
+    resizable: true,//マウスでリサイズ可
+    url: 'chart.html?name='+result[i],
+    appearanceParam: {
+        border: {
+        shadow: '2px 2px 10px  rgba(0, 0, 0, 0.5)',
+        width: 0,
+        radius: 6,
+        },
+
+        titleBar: {
+            color: 'black',
+            background: '#4784d4'
+        }
+    }
+
+});
+
+const align = 'CENTER_CENTER';//アンカー
+
+// //(x,y)座標として画面の中央を指定、基準点（アンカー）をウィンドウの水平垂直の中心(CENTER_CENTER)にセット
+// const x = window.innerWidth / 2;
+// const y = window.innerHeight / 2;
+// frame0.setPosition(x, y, align);
+
+
+frame[i].show();
+    
+    
 }
 
-chart("Facebook, Inc.", "FB");
+
+
 // chart("Google, Inc.", "GOOG");
 // chart("Apple, Inc.", "AAPL");
 
-$('svg').wrapAll('<div class = "col-sm-10 flexBox">');
-$('svg').wrap('<div class = "chart-box" onclick = MouseClick() >');
 
+
+const actions ={
+    [result[i]]: () =>{
+        console.log("success");
+    }
+}
 
 function MouseClick(){
     alert('Click');
-    $(".chart-box").css("borderColor", "#f00");
+    $("#"+result[i]).css("borderColor", "#f00");
 }
+
+
 
 
 

@@ -15,8 +15,8 @@ var display= [
 function chart(name, symbol, fullWidth, fullHeight) {
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 500 - margin.left - margin.right,
-            height = 250 - margin.top - margin.bottom;
+            width = window.innerWidth - margin.left - margin.right,
+            height = window.innerHeight - margin.top - margin.bottom;
 
     var parseDate = d3.timeParse("%d-%b-%y");
 
@@ -156,7 +156,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
     var feed;
 
-    d3.csv(symbol+".csv", function(error, csv) {
+    d3.csv("data/"+symbol+".csv", function(error, csv) {
         var accessor = ohlc.accessor();
 
         feed = csv.map(function(d) {
@@ -209,24 +209,30 @@ function chart(name, symbol, fullWidth, fullHeight) {
         setTimeout(function() {
             var newData;
             var Data;
-            var spread = 0.8;
-            var priceNumber;
+            var spread = 0.1;
+            var price;
+            var priceSell =0;
             
-            var priceBuy = document.getElementById('price-buy');
-            var priceSell = document.getElementById('price-sell');
          
 
             if(data.length < feed.length) {
                 // Simulate a daily feed
                 newData = feed.slice(0, data.length+1);
                 Data = newData[newData.length - 1];
-  
-                priceNumber = parseFloat(Data.close);
-                // console.log(priceNumber);
-                priceBuy.innerHTML = priceNumber;
-                priceSell.innerHTML =priceNumber;
                 
-          
+                price = parseFloat(Data.close);
+                console.log(price);
+                
+                $(function(){
+                        $('#price-buy' , parent.document).text(price).val();
+                        
+                        priceSell = price - spread;
+                        priceSell = priceSell*100;
+                        priceSell = Math.round(priceSell);
+                        priceSell = priceSell * 0.01;
+                        $('#price-sell' , parent.document).text(priceSell).val();
+                    
+                });
                 
             }
             else {
