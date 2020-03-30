@@ -9,6 +9,17 @@ var display= [
         {number: "5", height: "1", width: "0.2"},
         {number: "6", height: "0.5", width: "0.33"},
 ];
+var shiftTime =[
+        {candleTime: "m1",time:1},
+        {candleTime: "m5",time:5},
+        {candleTime: "m15",time:15},
+        {candleTime: "m30",time:30},
+        {candleTime: "h1",time:60},
+        {candleTime: "h4",time:240},
+        {candleTime: "d1",time:1440},
+        {candleTime: "w1",time:10080},
+
+];
 
 
 // definition of function and variable
@@ -204,7 +215,10 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
                 svg.select("g.crosshair.ohlc").call(crosshair);
             });
-
+        var candle = symbol.split('-');
+        console.log(candle[1]);
+        
+    
         // Set next timer expiry
         setTimeout(function() {
             var newData;
