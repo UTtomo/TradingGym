@@ -1,6 +1,6 @@
 
-
-
+// 外部ファイルindex.jsを読み込み、chart.jsにいれる！
+// んで、送り速度を変更できるようにする
 var display= [
         {number: "1", height: "1", width: "1"},
         {number: "2", height: "1", width: "0.5"},
@@ -172,12 +172,12 @@ function chart(name, symbol, fullWidth, fullHeight) {
             };
         }).sort(function(a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
 
-        // Start off an initial set of data
+        // 描画範囲を指定
         redraw(feed.slice(0, 163));
         
         
     });
-
+    
     function redraw(data) {
         var accessor = ohlc.accessor();
         var shiftTime ={
@@ -225,9 +225,14 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
         // $('#range' , parent.document).text(price).val();
 
-
+        // function timeGet(value){
+        //         console.log(value);
+        //         var time = value;
+        //         return time;
+        // }
         
-            
+        console.log(window.parent.getValue());
+
         // Set next timer expiry
         setTimeout(function() {
             var newData;
@@ -236,7 +241,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
             var price;
             var priceSell =0;
             
-                
+            
 
             if(data.length < feed.length) {
                 // Simulate a daily feed
@@ -245,6 +250,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
                 
                 price = parseFloat(Data.close);
                 // console.log(price);
+                
                 
                 $(function(){
                         price = price.toPrecision(4);
@@ -269,8 +275,9 @@ function chart(name, symbol, fullWidth, fullHeight) {
             }
 
             redraw(newData);
-        }, (Math.random()*1000)+400); // Randomly pick an interval to update the chart
+        }, (window.parent.getValue()*50)); // Randomly pick an interval to update the chart
     }
+    
 
     function move(coords) {
         coordsText.text(
@@ -278,6 +285,9 @@ function chart(name, symbol, fullWidth, fullHeight) {
         );
     }
 }
+
+
+
 // -----------------------------------
 var displayNum = 4;
 
