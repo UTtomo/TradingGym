@@ -354,6 +354,12 @@ text-decoration: none;
     display: flex;
     flex-wrap: wrap;
 }
+.form-control-range{
+    margin-top: 50px;
+}
+.title {
+    padding-top: 15px;
+}
 
 
 

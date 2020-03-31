@@ -14,6 +14,7 @@
 <script src="http://techanjs.org/techan.min.js"></script>
 <script src="https://riversun.github.io/jsframe/jsframe.js"></script>
 <script src="index.js"></script>
+<script src="chart.js"></script>
 
 <h>Trading Gym</head>
 <a href= "chart/USDJPY/chart.html">USDJPY</a>
@@ -128,19 +129,38 @@ function MouseClick(){
         </div>
         <div>
                 <p class="title">ロット</p>
-                <input type="text" class="form-control">lot
+                <input type="text" class="form-control" value = "1">lot
             
                 <div>
                     <button type="button" class="btn btn-outline-buy"onclick="history.back()">Buy</button>
                     <button type="button" class="btn btn-outline-sell"onclick="history.back()">Sell</button>
                 </div>
                 <div>
-                    <input type="range" class="form-control-range" id="formControlRange">
+
                     <button type="button" class="btn btn-outline-stop"onclick="history.back()">Stop</button>
+
+                    <p><span id="shiftOutput">50</span></p>
+                    <p><input type="range" value="50" id="shift" onmousemove="getValue()" onchange="getValue()"></p>
+                    <p>
+                        <button onclick="setValue(0);">0</button>
+                        <button onclick="setValue(25);">25</button>
+                        <button onclick="setValue(50);">50</button>
+                        <button onclick="setValue(75);">75</button>
+                        <button onclick="setValue(100);">100</button>
+                    </p>
+
+
                 </div>
         </div>
 </div>
 
+<!-- <script>
+    $(function() {
+    $(document).on('click', '#oya button', function() {
+        $('#child-frame').contents().find('#ko-result').text($('#oya input').val());
+    });
+});
+</script> -->
 
 </body>
 
