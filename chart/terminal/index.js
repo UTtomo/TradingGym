@@ -9,17 +9,7 @@ var display= [
         {number: "5", height: "1", width: "0.2"},
         {number: "6", height: "0.5", width: "0.33"},
 ];
-var shiftTime =[
-        {candleTime: "m1",time:1},
-        {candleTime: "m5",time:5},
-        {candleTime: "m15",time:15},
-        {candleTime: "m30",time:30},
-        {candleTime: "h1",time:60},
-        {candleTime: "h4",time:240},
-        {candleTime: "d1",time:1440},
-        {candleTime: "w1",time:10080},
 
-];
 
 
 // definition of function and variable
@@ -190,6 +180,18 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
     function redraw(data) {
         var accessor = ohlc.accessor();
+        var shiftTime ={
+                "m1":{"time":1},
+                "m5":{"time":5},
+                "m15":{"time":15},
+                "m30":{"time":30},
+                "h1":{"time":60},
+                "h4":{"time":240},
+                "d1":{"time":1440},
+                "w1":{"time":10080}
+
+        };
+        
 
         x.domain(data.map(accessor.d));
         // Show only 150 points on the plot
@@ -217,7 +219,9 @@ function chart(name, symbol, fullWidth, fullHeight) {
             });
         var candle = symbol.split('-');
         console.log(candle[1]);
-        
+        var key = candle[1];
+        console.log(shiftTime[key]["time"]);
+
     
         // Set next timer expiry
         setTimeout(function() {
@@ -235,15 +239,20 @@ function chart(name, symbol, fullWidth, fullHeight) {
                 Data = newData[newData.length - 1];
                 
                 price = parseFloat(Data.close);
-                console.log(price);
+                // console.log(price);
                 
                 $(function(){
+                        price = price.toPrecision(4);
                         $('#price-buy' , parent.document).text(price).val();
                         
                         priceSell = price - spread;
-                        priceSell = priceSell*100;
-                        priceSell = Math.round(priceSell);
-                        priceSell = priceSell * 0.01;
+                        priceSell = Math.round(priceSell * Math.pow(10,2))/Math.pow(10,2);
+                        // priceSell = priceSell*100;
+                        // // console.log(priceSell);
+                        // priceSell = Math.round(priceSell);
+                        // // console.log(priceSell);
+                        // priceSell = priceSell * 0.01;
+                        priceSell = priceSell.toPrecision(4);
                         $('#price-sell' , parent.document).text(priceSell).val();
                     
                 });
