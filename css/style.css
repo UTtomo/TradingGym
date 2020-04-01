@@ -360,10 +360,25 @@ text-decoration: none;
 .title {
     padding-top: 15px;
 }
+.button-module{
+    background-color: #222;
+    height: 40px;
+}
+.button-module button,.button-module select{
+    font-size: 1.3em;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #eee;
+    border-style: none;
+}
 
-
+.button-module button:hover, .button-module select:hover{
+    background-color: rgb(98, 0, 0);
+    color: #eee;
+}
 
 /* -------------------------------chart window-------------------------------------------- */
 .chart-box{
     background: #222;
+
 }

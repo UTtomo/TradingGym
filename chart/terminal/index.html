@@ -17,9 +17,29 @@
 <script src="index.js"></script>
 <script src="chart.js"></script>
 
-<h>Trading Gym</head>
-<a href= "chart/USDJPY/chart.html">USDJPY</a>
-<a href= "chart/EURJPY/chart.html">EURUSD</a>
+<div class ="button-module">
+    <p>
+    
+    <a href="#" ><img src="../../css/start.png" height="30px"></a>
+
+        <button onclick="setValue(0);"> / </button>
+        <button onclick="setValue(25);">|</button>
+        <button onclick="setValue(50);">―</button>
+        <button onclick="setValue(10000);"><i class="fas fa-grip-lines-vertical"></i></button>
+        <button onclick="setValue(0);"><i class="fas fa-vector-square"></i></button>
+        <button onclick="setValue(25);">△</button>
+        <button onclick="setValue(50);"><i class="fas fa-font"></i></button>
+        <button onclick="setValue(10000);"><i class="far fa-trash-alt"></i></button>
+        <button onclick="setValue(50);"><i class="fas fa-expand-arrows-alt"></i></button>
+        <button onclick="setValue(10000);"><i class="fas fa-compress-arrows-alt"></i></button>
+        <select name="example">
+            <option value="選択肢1">選択肢1</option>
+            <option value="選択肢2">選択肢2</option>
+            <option value="選択肢3">選択肢3</option>
+        </select>
+    </p>
+</div>
+
 
 
     
@@ -51,7 +71,7 @@ for (var i=0; i <= length-1; i++){
      
     frame[i] = jsFrame.create({
     title: result[i],
-    left: 20+50*i, top: 20+50*i, width: window.innerWidth/2 , height: window.innerHeight/2,
+    left: 100+50*i, top: 100+50*i, width: window.innerWidth/2 , height: window.innerHeight/2,
     movable: true,//マウスで移動可能
     resizable: true,//マウスでリサイズ可
     url: 'chart.html?name='+result[i],
@@ -106,20 +126,19 @@ function MouseClick(){
 
 
 </script>
-</div>
-    
-    </script>
+
 
 
 <div class="row">
+
     <div class="col-sm-10 chartBox">
 
-</div>
+    </div>
 
-<div class="col-sm-2">
+    <div class="col-sm-2">
 
 
-</div>
+    </div>
 
 <div class = "order-box right-fix">
 
