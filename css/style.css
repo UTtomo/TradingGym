@@ -326,9 +326,12 @@ text-decoration: none;
 .row-box{
     display: flex;
     text-align: center;
+
+    
 }
+
 .item{
-    margin: 0 5px 0 5px;
+    margin: 5px 10px 5px 10px;
 }
 
 .range-field{
@@ -377,6 +380,29 @@ text-decoration: none;
     color: #eee;
 }
 
+.row-box-close{
+    display: flex;
+    text-align: center;
+    border: 1px solid #474747;
+    margin-top: 5px;
+    
+}
+.item-close{
+    margin: 5px 10px 5px 10px;
+}
+.button-close{
+    font-size: 0.8em;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #eee;
+    border-style: none;
+
+}
+.button-close:hover{
+    background-color: rgb(11, 133, 182);
+    color: #eee;
+
+}
 /* -------------------------------chart window-------------------------------------------- */
 .chart-box{
     background: #222;

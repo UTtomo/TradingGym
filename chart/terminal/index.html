@@ -28,14 +28,17 @@
         <button onclick="setValue(10000);"><i class="fas fa-grip-lines-vertical"></i></button>
         <button onclick="setValue(0);"><i class="fas fa-vector-square"></i></button>
         <button onclick="setValue(25);">△</button>
+        <button onclick="setValue(25);">⇒</button>
         <button onclick="setValue(50);"><i class="fas fa-font"></i></button>
         <button onclick="setValue(10000);"><i class="far fa-trash-alt"></i></button>
         <button onclick="setValue(50);"><i class="fas fa-expand-arrows-alt"></i></button>
         <button onclick="setValue(10000);"><i class="fas fa-compress-arrows-alt"></i></button>
-        <select name="example">
-            <option value="選択肢1">選択肢1</option>
-            <option value="選択肢2">選択肢2</option>
-            <option value="選択肢3">選択肢3</option>
+        <select name="インジケーター">
+            <option value="選択肢1">移動平均線</option>
+            <option value="選択肢2">ボリンジャーバンド</option>
+            <option value="選択肢3">MACD</option>
+            <option value="選択肢3">RSI</option>
+            <option value="選択肢3">ストキャスティクス</option>
         </select>
     </p>
 </div>
@@ -152,8 +155,8 @@ function MouseClick(){
                 <input type="text" class="form-control" value = "1">lot
             
                 <div>
-                    <button type="button" class="btn btn-outline-buy"onclick="history.back()">Buy</button>
-                    <button type="button" class="btn btn-outline-sell"onclick="history.back()">Sell</button>
+                    <button type="button" class="btn btn-outline-buy" id="Buy">Buy</button>
+                    <button type="button" class="btn btn-outline-sell"onclick="Sell()">Sell</button>
                 </div>
                 <div>
 
@@ -167,6 +170,7 @@ function MouseClick(){
                         <button onclick="setValue(50);"><i class="fas fa-angle-right"></i></button>
                         <button onclick="setValue(10000);">■</button>
                     </p>
+                    <p id = "log"></p>
 
 
                 </div>
@@ -174,6 +178,19 @@ function MouseClick(){
 </div>
 
 <script>
+    var lot =1;
+    var priceBuy;
+    
+    
+$(function() {
+    $('#Buy').on('click', function() {
+        priceBuy = document.getElementById('price-buy').textContent;
+        priceBuy = String(priceBuy);
+        console.log(priceBuy);
+        $('#log').append('<div class ="row-box-close"><p class="item-close">Buy</p> <p class="item-close" id="price-buy">'+priceBuy+'</p>  <p class="lot item-close">'+lot+'lot</p> <button class ="item-close button-close">決済</button>');
+    });
+});
+
 function setValue( $value ) {
     var $elementReference = document.getElementById( "shift" );
     $elementReference.value = $value;
@@ -186,8 +203,9 @@ function getValue() {
     document.getElementById( "shiftOutput" ).innerHTML = $value;
     // console.log($value);
     return $value;
-
 }
+
+
 </script>
 
 </body>

@@ -231,8 +231,8 @@ function chart(name, symbol, fullWidth, fullHeight) {
         //         return time;
         // }
         
-        console.log(window.parent.getValue());
-
+        // console.log(window.parent.getValue());
+// 
         // Set next timer expiry
         setTimeout(function() {
             var newData;
@@ -261,6 +261,11 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
                         priceSell = priceSell.toPrecision(4);
                         $('#price-sell' , parent.document).text(priceSell).val();
+
+                        function Buy(){
+                                $('#log' , parent.document).append(price).val();
+                                
+                        }
                     
                 });
                 
