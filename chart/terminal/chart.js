@@ -157,6 +157,13 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
     var feed;
 
+    var zoom = d3.zoom()
+            .on("zoom", zoomed);
+
+    var zoomableInit;
+
+
+
     d3.csv("data/"+symbol+".csv", function(error, csv) {
         var accessor = ohlc.accessor();
 
@@ -177,6 +184,17 @@ function chart(name, symbol, fullWidth, fullHeight) {
         
         
     });
+    
+    function zoomed() {
+        var rescaledY = d3.event.transform.rescaleY(y);
+        yAxis.scale(rescaledY);
+        candlestick.yScale(rescaledY);
+
+        // Emulates D3 behaviour, required for financetime due to secondary zoomable scale
+        x.zoomable().domain(d3.event.transform.rescaleX(zoomableInit).domain());
+
+        draw();
+    }
     
     function redraw(data) {
         //     console.log(data);

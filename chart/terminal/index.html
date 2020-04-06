@@ -153,16 +153,21 @@ function MouseClick(){
         </div>
         <div>
                 <p class="title">ロット</p>
-                <input type="text" class="form-control" id="lot" value = "1">lot
+               <div class ="row-box"> <input type="text" class="form-control" id="lot" value = "1">lot</div>
+
+                <select name="インジケーター">
+                    <option value="選択肢1">移動平均線</option>
+                    <option value="選択肢2">ボリンジャーバンド</option>
+                    <option value="選択肢3">MACD</option>
+                    <option value="選択肢3">RSI</option>
+                    <option value="選択肢3">ストキャスティクス</option>
+                </select>
             
                 <div>
                     <button type="button" class="btn btn-outline-buy" id="Buy">Buy</button>
                     <button type="button" class="btn btn-outline-sell" id="Sell">Sell</button>
                 </div>
                 <div>
-
-                    <button type="button" class="btn btn-outline-stop"onclick="history.back()">Stop</button>
-
                     <p><span id="shiftOutput">50</span></p>
                     <p><input type="range" value="50" id="shift" onmousemove="getValue()" onchange="getValue()"></p>
                     <p>
