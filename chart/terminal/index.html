@@ -7,6 +7,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/style.css">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.css" type="text/css" media="all" />
 </head>
 
 
@@ -144,7 +145,7 @@ function MouseClick(){
     </div>
 
 <div class = "order-box right-fix">
-
+    <p id = "date" class="">4/3</p>
         <p class = "title">現在の価格</p>
         <div class = "row-box">
         <p id = "price-buy" class="price-buy item">00.000</p>
@@ -152,11 +153,11 @@ function MouseClick(){
         </div>
         <div>
                 <p class="title">ロット</p>
-                <input type="text" class="form-control" value = "1">lot
+                <input type="text" class="form-control" id="lot" value = "1">lot
             
                 <div>
                     <button type="button" class="btn btn-outline-buy" id="Buy">Buy</button>
-                    <button type="button" class="btn btn-outline-sell"onclick="Sell()">Sell</button>
+                    <button type="button" class="btn btn-outline-sell" id="Sell">Sell</button>
                 </div>
                 <div>
 
@@ -180,16 +181,62 @@ function MouseClick(){
 <script>
     var lot =1;
     var priceBuy;
+    var userId;
     
     
 $(function() {
     $('#Buy').on('click', function() {
+        lot = document.getElementById('lot').value;
         priceBuy = document.getElementById('price-buy').textContent;
+        jsFrame.showToast({ width: 260,height: 100, duration: 1000,align: 'center',
+        style: {borderRadius: '2px',backgroundColor: 'rgb(212,175,55,0.8)',},
+        html: '<i class="far fa-lightbulb faa-bounce animated" style="color:white"></i><span style="color:white;">　注文が確定しました。</span>',
+        closeButton: true,//閉じるボタンを表示
+        closeButtonColor: 'white'//閉じるボタンの色
+        });
+        var uuid = getUniqueStr();
         priceBuy = String(priceBuy);
+        
         console.log(priceBuy);
-        $('#log').append('<div class ="row-box-close"><p class="item-close">Buy</p> <p class="item-close" id="price-buy">'+priceBuy+'</p>  <p class="lot item-close">'+lot+'lot</p> <button class ="item-close button-close">決済</button>');
+        console.log(lot);
+        $('#log').append('<div class ="row-box-close" id = "'+uuid+'"><p class="item-close buy">Buy</p> <p class="item-close" id="price-buy">'+priceBuy+'</p>  <p class="lot item-close">'+lot+'lot</p> <button class ="item-close button-close" id = "close">決済</button></div>');
+        Position("buy",priceBuy,lot,uuid);
+        
+    });
+    $('#Sell').on('click', function() {
+        lot = document.getElementById('lot').value;
+        priceSell = document.getElementById('price-sell').textContent;
+        jsFrame.showToast({ width: 260,height: 100, duration: 1000,align: 'center',
+        style: {borderRadius: '2px',backgroundColor: 'rgb(212,175,55)',},
+        html: '<i class="far fa-lightbulb faa-bounce animated" style="color:white"></i><span style="color:white;">　注文が確定しました。</span>',
+        closeButton: true,//閉じるボタンを表示
+        closeButtonColor: 'white'//閉じるボタンの色
+        });
+        var uuid = getUniqueStr();
+        priceSell = String(priceSell);
+        console.log(priceSell);
+        console.log(lot);
+        $('#log').append('<div class ="row-box-close" id = "'+uuid+'"><p class="item-close sell">Sell</p> <p class="item-close" id="price-buy">'+priceSell+'</p>  <p class="lot item-close">'+lot+'lot</p> <button class ="item-close button-close" id = "close">決済</button>');
+        Position("sell",priceSell,lot,uuid);
+        
+    });
+    $(document).on("click", "#close" , function() {
+        var id= $(this).parent('div').attr('id');
+        PositionClose(id);
     });
 });
+
+function Close(buttonId){
+    console.log("button");
+    console.log(buttonId);
+
+}
+
+function getUniqueStr(myStrong){
+ var strong = 1000;
+ if (myStrong) strong = myStrong;
+ return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
+}
 
 function setValue( $value ) {
     var $elementReference = document.getElementById( "shift" );
@@ -204,6 +251,8 @@ function getValue() {
     // console.log($value);
     return $value;
 }
+
+
 
 
 </script>

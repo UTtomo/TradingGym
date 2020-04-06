@@ -179,6 +179,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
     });
     
     function redraw(data) {
+        //     console.log(data);
         var accessor = ohlc.accessor();
         var shiftTime ={
                 "m1":{"time":1},
