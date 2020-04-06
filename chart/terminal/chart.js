@@ -241,6 +241,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
             var spread = 0.1;
             var price;
             var priceSell =0;
+            var date;
             
             
 
@@ -248,12 +249,14 @@ function chart(name, symbol, fullWidth, fullHeight) {
                 // Simulate a daily feed
                 newData = feed.slice(0, data.length+1);
                 Data = newData[newData.length - 1];
-                
+                date = Data.date;
                 price = parseFloat(Data.close);
                 // console.log(price);
                 
                 
                 $(function(){
+                        console.log(date);
+                        $('#date' , parent.document).text(date);
                         price = price.toPrecision(4);
                         $('#price-buy' , parent.document).text(price).val();
                         

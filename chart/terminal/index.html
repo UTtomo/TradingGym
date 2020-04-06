@@ -223,6 +223,12 @@ $(function() {
     $(document).on("click", "#close" , function() {
         var id= $(this).parent('div').attr('id');
         PositionClose(id);
+        jsFrame.showToast({ width: 260,height: 100, duration: 1000,align: 'center',
+        style: {borderRadius: '2px',backgroundColor: 'rgb(128,45,49,0.8)',},
+        html: '<i class="far fa-lightbulb faa-bounce animated" style="color:white"></i><span style="color:white;">　決済されました。</span>',
+        closeButton: true,//閉じるボタンを表示
+        closeButtonColor: 'white'//閉じるボタンの色
+        });
     });
 });
 
