@@ -35,6 +35,13 @@ function chart(name, symbol, fullWidth, fullHeight) {
             .xScale(x)
             .yScale(y);
 
+    var trendline = techan.plot.trendline()
+            .xScale(x)
+            .yScale(y)
+            .on("mouseenter", enter)
+            .on("mouseout", out)
+            .on("drag", drag);
+
     var sma0 = techan.plot.sma()
             .xScale(x)
             .yScale(y);
@@ -57,6 +64,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
     var xAxis = d3.axisBottom(x);
 
     var yAxis = d3.axisLeft(y);
+
 
     var volumeAxis = d3.axisRight(yVolume)
             .ticks(3)
@@ -92,6 +100,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
             .attr('id', symbol);
 
     var defs = svg.append("defs");
+    
 
 
 // cursor information
@@ -145,9 +154,23 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
     svg.append("g")
             .attr("class", "volume axis");
+    svg.append("g")
+            .attr("class", "trendlines");
 
     svg.append('g')
             .attr("class", "crosshair ohlc");
+    svg.append("g")
+            .attr("class", "trendlines analysis")
+            .attr("clip-path", "url(#ohlcClip)");
+
+    svg.append('g')
+            .attr("class", "crosshair ohlc");
+
+    var valueText = svg.append('text')
+            .style("text-anchor", "end")
+            .attr("class", "coords")
+            .attr("x", width - 5)
+            .attr("y", 15);
 
     var coordsText = svg.append('text')
             .style("text-anchor", "end")
@@ -157,10 +180,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
 
     var feed;
 
-    var zoom = d3.zoom()
-            .on("zoom", zoomed);
 
-    var zoomableInit;
 
 
 
@@ -180,23 +200,25 @@ function chart(name, symbol, fullWidth, fullHeight) {
         }).sort(function(a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
 
         // 描画範囲を指定
-        redraw(feed.slice(0, 163));
-        
+        redraw(feed.slice(0, 163), trendlineData.slice(0, trendlineData.length-1));
+        d3.select("button").on("click", function() { draw(data, trendlineData); }).style("display", "inline");
         
     });
     
-    function zoomed() {
-        var rescaledY = d3.event.transform.rescaleY(y);
-        yAxis.scale(rescaledY);
-        candlestick.yScale(rescaledY);
 
-        // Emulates D3 behaviour, required for financetime due to secondary zoomable scale
-        x.zoomable().domain(d3.event.transform.rescaleX(zoomableInit).domain());
 
-        draw();
-    }
+
+
+
+    
     
     function redraw(data) {
+        var trendlineData = [
+                { start: { date: new Date(2014, 2, 11), value: 72.50 }, end: { date: new Date(2014, 5, 9), value: 63.34 } },
+                { start: { date: new Date(2013, 10, 21), value: 43 }, end: { date: new Date(2014, 2, 17), value: 70.50 } }
+            ];
+
+        // console.log(trendlineData);
         //     console.log(data);
         var accessor = ohlc.accessor();
         var shiftTime ={
@@ -208,7 +230,6 @@ function chart(name, symbol, fullWidth, fullHeight) {
                 "h4":{"time":240},
                 "d1":{"time":1440},
                 "w1":{"time":10080}
-
         };
         
 
@@ -228,12 +249,14 @@ function chart(name, symbol, fullWidth, fullHeight) {
                 selection.select('g.x.axis').call(xAxis);
                 selection.select('g.y.axis').call(yAxis);
                 selection.select("g.volume.axis").call(volumeAxis);
-
+                // selection.select("g.trendlines").datum(trendlineData).call(trendline).call(trendline.drag);
+                // svg.selectAll("g.trendlines").datum(trendlineData).call(trendline).call(trendline.drag);
                 selection.select("g.candlestick").datum(data).call(ohlc);
                 selection.select("g.sma.ma-0").datum(sma0Calculator(data)).call(sma0);
                 selection.select("g.sma.ma-1").datum(sma1Calculator(data)).call(sma1);
                 selection.select("g.volume").datum(data).call(volume);
-
+                svg.selectAll("g.trendlines").datum(trendlineData).call(trendline).call(trendline.drag);
+                svg.select("g.trendlines").call(trendline.refresh);
                 svg.select("g.crosshair.ohlc").call(crosshair);
             });
         var candle = symbol.split('-');
@@ -273,7 +296,7 @@ function chart(name, symbol, fullWidth, fullHeight) {
                 
                 
                 $(function(){
-                        console.log(date);
+                        // console.log(date);
                         $('#date' , parent.document).text(date);
                         price = price.toPrecision(4);
                         $('#price-buy' , parent.document).text(price).val();
@@ -304,7 +327,27 @@ function chart(name, symbol, fullWidth, fullHeight) {
             redraw(newData);
         }, (window.parent.getValue()*50)); // Randomly pick an interval to update the chart
     }
-    
+    function enter(d) {
+        console.log("touch");
+        valueText.style("display", "inline");
+        refreshText(d);
+    }
+
+     function out(d) {
+        console.log("touch");
+        valueText.style("display", "none");
+    }
+
+     function drag(d) {
+        console.log("touch");
+        refreshText(d);
+    }
+    function refreshText(d) {
+        valueText.text(
+            "Start: [" + timeFormat(d.start.date) + ", " + valueFormat(d.start.value) +
+            "] End: [" + timeFormat(d.end.date) + ", " + valueFormat(d.end.value) + "]"
+        );
+    }
 
     function move(coords) {
         coordsText.text(
@@ -313,17 +356,13 @@ function chart(name, symbol, fullWidth, fullHeight) {
     }
 }
 
+var trendlineData = [
+        { start: { date: new Date(2014, 1, 11), value: 47 }, end: { date: new Date(2014, 5, 9), value: 63.34 } },
+        { start: { date: new Date(2013, 10, 21), value: 43 }, end: { date: new Date(2014, 2, 17), value: 70.50 } }
+    ];
+
 
 
 // -----------------------------------
 var displayNum = 4;
 
-
-$('svg').wrapAll('<div class = "col-sm-10 flexBox">');
-$('svg').wrap('<div class = "chart-box" onclick = MouseClick() >');
-
-
-function MouseClick(){
-    alert('Click');
-    $(".chart-box").css("borderColor", "#f00");
-}
